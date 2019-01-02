@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Maze Game</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.14.0/dist/phaser.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="game-container"></div>
+
+    <script type="text/javascript">
+
+        var config = {
+            type: Phaser.AUTO,
+            width: 800,
+            height: 600,
+            parent: "game-container",
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    gravity: { y: 300 },
+                    debug: false
+                }
+            },
+            scene: {
+                preload: preload,
+                create: create,
+                update: update
+            }
+        };
+
+        var game = new Phaser.Game(config);
+        
+
+
+        function preload() {
+            this.load.image("tiles", "assets/MazeWallTiles.png");
+            this.load.tilemapTiledJSON("map", "assets/MazeWallTiles.json");
+        }
+
+        function create() {
+            const map = this.make.tilemap({ key: "map", tileWidth: 32, tileHeight: 32 });
+            const tileset = map.addTilesetImage("MazeWallTiles", "tiles");
+            const floor = map.createStaticLayer("Floor", tileset, 0, 0);
+            const walls = map.createStaticLayer("Walls", tileset, 0, 0);
+        }
+
+        function update() {
+          
+        }
+     
+       
+
+    </script>
+
+</body>
+
+</html>
