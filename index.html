@@ -25,7 +25,7 @@
             physics: {
                 default: 'arcade',
                 arcade: {
-                    gravity: { y: 300 },
+                    gravity: { y: 0 },
                     debug: false
                 }
             },
@@ -43,6 +43,7 @@
         function preload() {
             this.load.image("tiles", "assets/MazeWallTiles.png");
             this.load.tilemapTiledJSON("map", "assets/MazeWallTiles.json");
+            this.load.spritesheet('square', 'assets/RedSprite.png', {frameWidth: 24, frameHeight: 24});
         }
 
         function create() {
@@ -50,10 +51,20 @@
             const tileset = map.addTilesetImage("MazeWallTiles", "tiles");
             const floor = map.createStaticLayer("Floor", tileset, 0, 0);
             const walls = map.createStaticLayer("Walls", tileset, 0, 0);
+            walls.setCollisionByProperty({collides: true});
+            player = this.physics.add.sprite(64, 64, 'square');
+            player.setCollideWorldBounds(true);
+            cursors = this.input.keyboard.createCursorKeys();
+            this.physics.add.collider(player, walls);
         }
 
         function update() {
-          
+          if (cursors.left.isDown){player.setVelocityX(-100);}
+          else if (cursors.right.isDown){player.setVelocityX(100);}
+          else {player.setVelocityX(0);}
+          if (cursors.up.isDown){player.setVelocityY(-100);}
+          else if (cursors.down.isDown){player.setVelocityY(100);}
+          else {player.setVelocityY(0);}
         }
      
        
