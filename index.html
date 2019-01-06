@@ -20,7 +20,7 @@
         var config = {
             type: Phaser.AUTO,
             width: 800,
-            height: 600,
+            height: 608,
             parent: "game-container",
             physics: {
                 default: 'arcade',
@@ -48,7 +48,7 @@
 
         function create() {
             const map = this.make.tilemap({ key: "map", tileWidth: 32, tileHeight: 32 });
-            const tileset = map.addTilesetImage("MazeWallTiles", "tiles");
+            const tileset = map.addTilesetImage("MazeTiles", "tiles");
             const floor = map.createStaticLayer("Floor", tileset, 0, 0);
             const walls = map.createStaticLayer("Walls", tileset, 0, 0);
             walls.setCollisionByProperty({collides: true});
